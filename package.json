@@ -1,49 +1,14 @@
 {
-  "type": "module",
-
   "name": "rocket-elevators-javascript-controller",
-  
-
   "version": "1.0.0",
-  
-
   "description": "",
-  
-
   "main": "residential_controller.js",
-  
-
   "scripts": {
-  
-
-    
-
-  "test": "jest"
-  
-
+    "test": "jest"
   },
-  
-
   "author": "",
-  
-
   "dependencies": {
-  
-
-    
-
-  "esm": "^3.2.25",
-  
-
-    
-
-  "jest": "^27.0.3",
-  
-
-    
-
-  "lodash": "^4.17.21"
-  
-
+    "jest": "^27.0.3",
+    "lodash": "^4.17.21"
   }
 }
