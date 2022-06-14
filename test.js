@@ -1,8 +1,8 @@
-var _ = require('lodash');
-const { Column, Elevator, CallButton, FloorRequestButton, Door } = require('./residential_controller.js')
+import { cloneDeep } from 'lodash';
+import { Column, Elevator, CallButton, FloorRequestButton, Door } from './residential_controller.js';
 
 const scenario = (column, requestedFloor, direction, destination) => {
-    let tempColumn = _.cloneDeep(column);
+    let tempColumn = cloneDeep(column);
     let selectedElevator = tempColumn.requestElevator(requestedFloor, direction)
     let pickedUpUser = false
     if (selectedElevator.currentFloor == requestedFloor) {
