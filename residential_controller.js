@@ -14,7 +14,7 @@ class Column {
         this.elevatorList = [];
         this.callButtonList = [];
 
-        this.createElevators(_amountOfFloors, _amountOfElevators);
+        //this.createElevators(_amountOfFloors, _amountOfElevators);
         this.createCallButtons(_amountOfFloors);
     };
 
@@ -22,7 +22,7 @@ class Column {
         console.log(1);
         let buttonFloor = 1;
            
-        for (let i = 0; i < _amountOfFloors; i++){
+        for (let i = 1; i < _amountOfFloors; i++){
             //If it's not the last floor
             if (buttonFloor < _amountOfFloors){
                 let callButton = new CallButton(callButtonID, 'off', buttonFloor, 'up');
@@ -41,15 +41,15 @@ class Column {
         }     
     }
 
-    createElevators(_amountOfFloors, _amountOfElevators){
-      console.log(2)
-        for (let i = 0; i < _amountOfElevators; i++){
-            let elevator = new Elevator(elevatorID, _amountOfFloors);
-            this.elevatorList.push(elevator);
-            elevatorID++;
+    // createElevators(_amountOfFloors, _amountOfElevators){
+    //   console.log(2)
+    //     for (let i = 1; i < _amountOfElevators; i++){
+    //         let elevator = new Elevator(elevatorID, _amountOfFloors);
+    //         this.elevatorList.push(elevator);
+    //         elevatorID++;
             
-        }
-    }
+    //     }
+    // }
 
     //Simulate when a user press a button outside the elevator
     requestElevator(_floor, _direction) {
@@ -231,4 +231,4 @@ class Door {
 
 
 
-module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
+//module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }

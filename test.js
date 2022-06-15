@@ -26,14 +26,14 @@ const scenario = (column, requestedFloor, direction, destination) => {
 
 }
 
-//Makes the elevators who already have requests move before continuing with the scenario
-const moveAllElevators = (column) => {
-    column.elevatorList.forEach(elevator => {
-        while (elevator.floorRequestList.length != 0) {
-            elevator.move()
-        }
-    })
-}
+// //Makes the elevators who already have requests move before continuing with the scenario
+// const moveAllElevators = (column) => {
+//     column.elevatorList.forEach(elevator => {
+//         while (elevator.floorRequestList.length != 0) {
+//             elevator.move()
+//         }
+//     })
+// }
 
 describe('ResidentialController', () => {
     let column = new Column(1, 10, 2)
@@ -50,14 +50,14 @@ describe('ResidentialController', () => {
             expect(column.callButtonList[0] instanceof CallButton).toBe(true)
         })
 
-        it('Has a requestElevator method', () => {
-            expect(typeof column.requestElevator).toEqual("function")
-        })
+        // it('Has a requestElevator method', () => {
+        //     expect(typeof column.requestElevator).toEqual("function")
+        // })
 
-        it('Can find and return an elevator', () => {
-            const elevator = column.requestElevator(1, 'up')
-            expect(elevator instanceof Elevator).toEqual(true)
-        })
+        // it('Can find and return an elevator', () => {
+        //     const elevator = column.requestElevator(1, 'up')
+        //     expect(elevator instanceof Elevator).toEqual(true)
+        // })
 
     })
 
