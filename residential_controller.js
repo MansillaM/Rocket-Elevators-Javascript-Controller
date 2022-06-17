@@ -5,11 +5,9 @@ let elevatorID = 1
 let floorRequestButtonID = 1
 let callButtonID = 1
 
-
-
+//Create Column CLASS
 class Column {
     constructor(_id, _amountOfFloors, _amountOfElevators) {
-        //console.log("creating column with " + _amountOfElevators + " elevators.")
         this.ID = _id;
         this.status = 'active';
         this.elevatorList = [];
@@ -18,11 +16,10 @@ class Column {
         this.createElevators(_amountOfFloors, _amountOfElevators);
         this.createCallButtons(_amountOfFloors);
     };
-
+    //Create callButtons for elevator
     createCallButtons(_amountOfFloors) {
         //console.log(1);
         let buttonFloor = 1;
-
         for (let i = 0; i < _amountOfFloors; i++) {
             //If it's not the last floor
             if (buttonFloor < _amountOfFloors) {
@@ -30,7 +27,6 @@ class Column {
                 this.callButtonList.push(callButton);
                 callButtonID++;
             }
-
             //If it's not the first floor
             if (buttonFloor > 1) {
                 let callButton = new CallButton(callButtonID, buttonFloor, 1);
@@ -42,9 +38,8 @@ class Column {
         }
     }
 
+    //create elevators
     createElevators(_amountOfFloors, _amountOfElevators) {
-        //console.log(2)
-        //console.log("creating " + _amountOfElevators + " elevators.")
         for (let i = 0; i < _amountOfElevators; i++) {
             let elevator = new Elevator(elevatorID, _amountOfFloors);
             this.elevatorList.push(elevator);
@@ -54,9 +49,7 @@ class Column {
 
     //Simulate when a user press a button outside the elevator
     requestElevator(requestedFloor, direction) {
-
         let elevator = this.findElevator(requestedFloor, direction)
-        console.log("REUEST ELEVATOR")
         elevator.floorRequestList.push(requestedFloor)
         elevator.move()
         elevator.operateDoors()
@@ -71,7 +64,6 @@ class Column {
         let bestScore = 5
         let referenceGap = 10000000
         let bestElevatorInformations;
-
         for (let i = 0; i < this.elevatorList.length; i++) {
             let elevator = this.elevatorList[i];
             //The elevator is at my floor and going in the direction I want
@@ -94,12 +86,10 @@ class Column {
             bestScore = bestElevatorInformations.bestScore;
             referenceGap = bestElevatorInformations.referenceGap;
         }
-        console.log(bestElevator instanceof Elevator);
         return bestElevator
     }
-
+    //find correct way to get best elevator
     checkIfElevatorIsBetter(scoreToCheck, newElevator, bestScore, referenceGap, bestElevator, floor) {
-        
         if (scoreToCheck < bestScore) {
             bestScore = scoreToCheck;
             bestElevator = newElevator;
@@ -111,18 +101,15 @@ class Column {
                 referenceGap = gap;
             }
         }
-
         return {
             bestScore,
             referenceGap,
             bestElevator,
         }
     }
-
-
 }//END of Column
 
-
+//Create Elevator CLASS
 class Elevator {
     constructor(_id, _amountOfFloors) {
         this.ID = _id;
@@ -135,11 +122,9 @@ class Elevator {
 
         this.createFloorRequestButtons(_amountOfFloors);
     }
-
+    //floor request buttons needed
     createFloorRequestButtons(_amountOfFloors) {
-        //console.log(6);
         let buttonFloor = 1;
-
         for (let i = 0; i < _amountOfFloors; i++) {
             let floorRequestButton = new FloorRequestButton(floorRequestButtonID, 'off', buttonFloor);
             this.floorRequestButtonList.push(floorRequestButton)
@@ -150,15 +135,14 @@ class Elevator {
 
     //Simulate when a user press a button inside the elevator
     requestFloor(requestedFloor) {
-        //console.log(7);
         this.floorRequestList.push(requestedFloor);
         this.sortFloorList;
         this.move();
         this.operateDoors();
     }
 
+    //Move elevator with destination and requestfloor elements
     move() {
-        //console.log(8);
         while (this.floorRequestList.length != 0) {
             let destination = this.floorRequestList[0];
             this.status = 'moving';
@@ -179,8 +163,8 @@ class Elevator {
         this.status = 'idle';
     }
 
+    //Sort floor list in numerical order or reverse
     sortFloorList() {
-        //console.log(9);
         if (this.direction == 'up') {
             this.floorRequestList(function (a, b) { return a - b });
         } else {
@@ -188,6 +172,7 @@ class Elevator {
         }
     }
 
+    //Change status of door
     operateDoors() {
         //console.log(10);
         if (this.door.status == 'opened') {
@@ -195,26 +180,10 @@ class Elevator {
         } else if (this.door.status == 'closed')
             this.door.status = 'opened';
     }
-    //this.door.status = 'opened';
-    // setTimeout(function(){
-    //     if (this.door != 'overweight'){
-    //         this.door.status = 'closing';
-    //         if (false){
-    //         //this.door.status = 'closing';
-    //         }else{
-    //             this.operateDoors()
-    //         }
-    //     }else{
-    //         while (this.door === 'overweight'){
-    //         console.log('Activate overweight alarm')
-    //         }
-    //         this.operateDoors();
-    //     }
-
-    // },5000);
 }
 //}//END OF ELEVATOR  
 
+//Create CallButton CLASS
 class CallButton {
     constructor(_id, _floor, _direction) {
         this.ID = _id;
@@ -225,6 +194,7 @@ class CallButton {
     }
 }
 
+//Create FloorRequestButton CLASS
 class FloorRequestButton {
     constructor(_id, _floor) {
         this.ID = _id;
@@ -233,6 +203,7 @@ class FloorRequestButton {
     }
 }
 
+//Create Door CLASS
 class Door {
     constructor(_id) {
         this.ID = _id;
